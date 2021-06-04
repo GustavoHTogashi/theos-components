@@ -15,4 +15,5 @@ export interface TheosInput {
   style?: { [key: string]: any };
   bypassColorizeOnValidation?: boolean;
   tooltip?: { message: string; class: string };
+  test: string;
 }
