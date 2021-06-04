@@ -1,0 +1,18 @@
+<!-- <mat-spinner [id]="prefix+'__'+id"
+			 [diameter]="90"
+			 [color]="'accent'"
+			 [style.margin]="'auto'"
+			 [style.marginBottom]="'32px'">
+</mat-spinner> -->
+<ng-container *ngIf="timerSender$ | async; else loading">
+	<p class="text-center"
+	   [style.color]="'#ffab40'"
+	   [style.transition]="'all ease-in-out 2s'">{{messages.takingLonger}}
+	</p>
+</ng-container>
+<ng-template #loading>
+	<p class="text-center"
+	   [style.color]="'#ffab40'"
+	   [style.transition]="'all ease-in-out 2s'">{{messages.loading}}
+	</p>
+</ng-template>

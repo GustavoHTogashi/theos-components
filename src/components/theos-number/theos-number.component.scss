@@ -1,0 +1,41 @@
+@import "../_sass/input.scss";
+
+.th-ipt {
+  @include overridable-th-ipt(32);
+
+  /* Removendo as setas nos navegadores: Chrome, Safari, Edge, Opera */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  /* Removendo as setas no FireFox */
+  -moz-appearance: textfield;
+}
+
+.th_number__chevron {
+  display: grid;
+  place-items: center;
+  color: $theos__gray_600;
+  cursor: pointer;
+  height: toRem(16);
+  width: toRem(16);
+  line-height: toRem(16);
+  position: absolute;
+  right: toRem(12);
+  stroke-width: 3;
+  transition: all $th-animation-duration $th-animation-timing-function;
+  will-change: transform;
+
+  &:active {
+    transform: scale(1.2);
+  }
+}
+
+.th-number__chevron-up {
+  top: toRem(1);
+}
+
+.th-number__chevron-down {
+  bottom: toRem(1);
+}

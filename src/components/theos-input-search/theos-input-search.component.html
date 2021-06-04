@@ -1,0 +1,37 @@
+<span class="th-ipt__field"
+	  [formGroup]="group">
+	<input #thInputSearch
+		   [formControlName]="customDescriptionProperty || 'descricao'"
+		   [id]="prefix+'__'+id+'__description'"
+		   type="text"
+		   [attr.has-value]="hasValue"
+		   class="th-ipt description"
+		   [ngClass]="{'th-ipt__invalid': invalid, 'th-ipt__valid': valid}"
+		   [placeholder]=""
+		   (focus)="handleFocus()"
+		   (focusout)="handleFocusOut()"
+		   (keyup)="handleKeyup($event)">
+	<label class="th-ipt__label"
+		   [for]="id"> {{label}}
+		<ng-container *ngIf="hasValidator">
+			<strong>*</strong>
+		</ng-container>
+
+	</label>
+	<span class="th-ipt-search__actions">
+		<button type="button"
+				class="th-ipt-search__btn-remove"
+				[ngClass]="{'disabled': disabled}"
+				[attr.disabled]="disabled ? '' : null"
+				(click)="handleRemove()">
+			<i-feather name="x"></i-feather>
+		</button>
+		<button type="button"
+				class="th-ipt-search__btn-search"
+				[ngClass]="{'disabled': disabled}"
+				[attr.disabled]="disabled ? '' : null"
+				(click)="handleSearch()">
+			<i-feather name="search"></i-feather>
+		</button>
+	</span>
+</span>

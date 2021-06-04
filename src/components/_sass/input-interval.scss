@@ -1,0 +1,39 @@
+@import "./input.scss";
+
+:host {
+  display: grid;
+  grid-template-columns: 1fr toRem(24) 1fr;
+}
+
+.th-interval__ligature {
+  @include ui-text();
+
+  min-width: toRem(24);
+  min-height: toRem(32);
+  text-align: center;
+  border-width: toRem(1) 0;
+  border-style: solid;
+  
+  background-color: var(--gray-200);
+  border-color: var(--gray-800);
+  color: var(--gray-800);
+  transition: color, background-color,
+    border-color $th-animation-duration $th-animation-timing-function;
+  will-change: color, background-color, border-color;
+
+  &[disabled] {
+    background-color: var(--theos-white);
+    border-color: var(--gray-400);
+    color: var(--gray-600);
+  }
+
+  &:not([bypass-validation]) {
+    &[invalid] {
+      border-color: var(--theos-red);
+    }
+
+    &[valid] {
+      border-color: var(--theos-primary);
+    }
+  }
+}

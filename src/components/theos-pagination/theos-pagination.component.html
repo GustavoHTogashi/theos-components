@@ -1,0 +1,63 @@
+<div [id]="PREFIX+'__'+id"
+	 class="th-search-dialog__pages th-mt-10"
+	 [ngClass]="{'disabled': disabled}">
+	<nav>
+		<ul>
+			<li>
+				<button type="button"
+						class="btn__first"
+						[disabled]="disabled"
+						(click)="set.first()"
+						[id]="'th-page-btn-first'">
+					Primeira
+				</button>
+			</li>
+			<li>
+				<button type="button"
+						class="btn__chevron"
+						[disabled]="disabled"
+						(click)="set.back()"
+						[id]="'th-page-btn-back'">
+					<i-feather name="chevron-left">
+					</i-feather>
+				</button>
+			</li>
+			<ng-container *ngFor="let page of pages$ | async">
+				<li>
+					<button type="button"
+							class="btn__"
+							[ngClass]="{'selected': currentPage === page}"
+							[disabled]="disabled"
+							(click)="set.page(page)"
+							[id]="'th-page-btn-page_' + page">
+						{{page}}
+					</button>
+				</li>
+			</ng-container>
+			<li>
+				<button type="button"
+						class="btn__chevron"
+						[disabled]="disabled"
+						(click)="set.next()"
+						[id]="'th-page-btn-next'">
+					<i-feather name="chevron-right">
+					</i-feather>
+				</button>
+			</li>
+			<li>
+				<button type="button"
+						class="btn__last"
+						[disabled]="disabled"
+						(click)="set.last()"
+						[id]="'th-page-btn-last'">
+					Última
+				</button>
+			</li>
+		</ul>
+	</nav>
+	<div>
+		<span style="user-select: none;">Página {{currentPage}} de {{lastPage}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			{{pageDataStart}} - {{pageDataEnd}} de
+			{{totalData}} registro{{totalData > 1 ? 's' : ''}}</span>
+	</div>
+</div>

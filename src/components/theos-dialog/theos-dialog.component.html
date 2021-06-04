@@ -1,0 +1,32 @@
+<section class="th-dialog"
+		 [id]="PREFIX+'__'+id">
+	<header class="th-dialog__header">
+		<span class="th-dialog__title">
+			{{title}}
+		</span>
+		<span class="th-dialog__header_actions">
+			<a class="th-dialog__header_icon"
+			   *ngIf="help.observers.length > 0">
+				<i-feather [id]="PREFIX+'__'+id+'__help-button'"
+						   name="help-circle"
+						   (click)="help.emit()"
+						   [id]="PREFIX+'__'+id+'__header_icon__help-circle'"
+						   style="color: #ffffff;">
+				</i-feather>
+			</a>
+			<a class="th-dialog__header_icon">
+				<i-feather [id]="PREFIX+'__'+id+'__close-button'"
+						   (click)="close.emit()"
+						   name="x"
+						   style="color: #ffffff;">
+				</i-feather>
+			</a>
+		</span>
+	</header>
+	<div class="th-dialog__body">
+		<ng-content select="[dialogBody]"></ng-content>
+	</div>
+	<div class="th-dialog__footer">
+		<ng-content select="[dialogFooter]"></ng-content>
+	</div>
+</section>

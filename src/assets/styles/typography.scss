@@ -1,0 +1,122 @@
+@import './units.scss';
+
+@mixin ui-text {
+  @include fontInter();
+  @include fontAliasing();
+
+  font-weight: normal;
+  font-size: toRem(14);
+  line-height: $percent__max * 2;
+}
+
+@mixin ui-text-medium {
+  @include fontInter();
+  @include fontAliasing();
+
+  font-weight: 500;
+  font-size: toRem(14);
+  line-height: $percent__max * 2;
+}
+
+@mixin ui-text-medium-11px {
+  @include fontInter();
+  @include fontAliasing();
+
+  font-weight: 500;
+  font-size: toRem(11);
+  line-height: $percent__max;
+}
+
+@mixin ui-text-medium-16px {
+  @include fontInter();
+  @include fontAliasing();
+
+  font-weight: 500;
+  font-size: toRem(16);
+  line-height: $percent__max * 2;
+}
+
+@mixin ui-text-semibold {
+  @include fontInter();
+  @include fontAliasing();
+
+  font-weight: 600;
+  font-size: toRem(14);
+  line-height: $percent__max * 2;
+}
+
+@mixin ui-text-bold {
+  @include fontInter();
+  @include fontAliasing();
+
+  font-weight: bold;
+  font-size: toRem(14);
+  line-height: $percent__max * 2;
+}
+
+@mixin button-text-bold {
+  @include fontPoppins();
+  @include fontAliasing();
+
+  font-weight: bold;
+  font-size: toRem(14);
+  line-height: $percent__max * 2;
+}
+
+@mixin button-text-bold-12px {
+  @include fontPoppins();
+  @include fontAliasing();
+
+  font-weight: bold;
+  font-size: toRem(12);
+  line-height: $percent__max;
+}
+
+@mixin button-text-bold-10px-uppercase {
+  @include fontPoppins();
+  @include fontAliasing();
+
+  font-weight: bold;
+  font-size: toRem(10);
+  line-height: $percent__max;
+  letter-spacing: 0.05rem;
+}
+
+@mixin input-label-text-regular-12px {
+  @include fontInter();
+  @include fontAliasing();
+
+  font-weight: normal;
+  font-size: toRem(12);
+  line-height: $percent__max;
+}
+
+@mixin tag-text-medium-12px {
+  @include fontRoboto();
+  @include fontAliasing();
+
+  font-weight: 500;
+  font-size: toRem(12);
+  line-height: $percent__max * 1.5;
+}
+
+@mixin fontRoboto {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+}
+
+@mixin fontAliasing {
+  font-smooth: always;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin fontInter {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+}
+
+@mixin fontPoppins {
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+}

@@ -1,0 +1,19 @@
+@import "../_sass/input.scss";
+
+.th-ipt {
+  padding-top: toRem(6);
+
+  &[readonly] {
+    border-color: var(--gray-600);
+	color: var(--gray-700);
+
+    &[disabled] {
+      color: var(--gray-600);
+      border-color: var(--gray-400);
+    }
+
+    ~ .th-ipt__label {
+      color: var(--gray-600);
+    }
+  }
+}

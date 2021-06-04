@@ -1,0 +1,163 @@
+@import "../assets/styles/common.scss";
+
+@include theosMargins();
+
+@import "../assets/styles/animations.scss";
+@import "../assets/styles/typography.scss";
+@import "../assets/styles/units.scss";
+@import "../assets/styles/scrollbar.scss";
+
+@include theos-scrollbar(
+  ".debug-item__content",
+  var(--gray-700),
+  var(--gray-800)
+);
+
+@include theos-scrollbar(".debug-console", var(--gray-400), var(--gray-200));
+
+.debug-console {
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: var(--gray-200);
+  color: var(--gray-800);
+  height: 95vh;
+  width: 25vw;
+  will-change: transform;
+  transition: all $th-animation-duration $th-animation-timing-function;
+  z-index: 999;
+  @include ui-text();
+  box-shadow: toRem(1) toRem(2) toRem(8) toRem(2) rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+  overflow: auto;
+  padding: toRem(16);
+
+  &[collapse] {
+    overflow: unset;
+    .debug-console__collapsable {
+      transform: translateX(25vw);
+      span {
+        // order: 1;
+      }
+
+      i-feather {
+        // order: 2;
+        transform: rotate(180deg);
+      }
+    }
+    transform: translateX(-25vw);
+  }
+
+  .debug-console__collapsable {
+    span {
+    //   order: 2;
+    }
+
+    i-feather {
+    //   order: 1;
+    }
+    transform: translateX(0);
+  }
+  transform: translateX(0);
+}
+
+.debug-console__collapsable {
+  width: 50%;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  color: var(--gray-800);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: toRem(8);
+  will-change: transform, opacity;
+  transition: all $th-animation-duration $th-animation-timing-function;
+
+//   &:hover {
+//     background-color: var(--gray-300);
+//   }
+
+  span {
+    padding: 0 toRem(8);
+  }
+
+  i-feather {
+    color: var(--gray-800);
+    display: grid;
+    place-items: center;
+    width: toRem(20);
+    height: toRem(20);
+    will-change: transform;
+    transition: all $th-animation-duration * 1.5 $th-animation-timing-function;
+  }
+}
+
+.debug-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  row-gap: 4px;
+  background-color: var(--gray-200);
+  color: var(--gray-800);
+  user-select: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.debug-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  row-gap: 4px;
+  background-color: var(--gray-200);
+  color: var(--gray-800);
+  user-select: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.debug-info__item {
+
+
+  .debug-item__collapsable {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    transition: all $th-animation-duration $th-animation-timing-function;
+
+    &:hover {
+      background-color: var(--gray-300);
+    }
+  }
+
+  .debug-item__content {
+    background-color: var(--gray-800);
+    color: var(--theos-white);
+    display: block;
+    padding: 0 toRem(12);
+
+    transition: height $th-animation-duration * 2 $th-animation-timing-function;
+    will-change: transform padding;
+
+    height: 0;
+    overflow: auto;
+
+    unicode-bidi: embed;
+    white-space: pre;
+    word-wrap: break-word;
+    word-break: break-all;
+
+    &[collapse] {
+      height: 400px;
+    }
+  }
+}
+.debug-info__item__content {
+    padding: 0 toRem(8);
+    display: flex;
+    flex-direction: column;
+  }

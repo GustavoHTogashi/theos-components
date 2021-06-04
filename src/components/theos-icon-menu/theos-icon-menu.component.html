@@ -1,0 +1,45 @@
+<button #iconMenuButton
+		[id]="PREFIX+'__'+id"
+		class="icon-menu__button"
+		[ngStyle]="iconMenuButtonStyles"
+		(click)="handleOpenIconMenu()">
+	<i-feather name="more-horizontal">
+	</i-feather>
+</button>
+
+<ng-template #iconMenu
+			 let-data>
+	<div class="icon-menu"
+		 [ngClass]="iconMenuClasses"
+		 [ngStyle]="iconMenuStyles">
+		<span *ngFor="let icon of data.menuIconsList; let i = index"
+			  class="icon-menu__item"
+			  [attr.disabled]="icon.disable ? '' : null">
+			<button [id]="PREFIX+'__'+id+'__menuButton__'+i"
+					class="icon-menu__item__button"
+					[attr.disabled]="icon.disable ? 'true' : null"
+					[ngStyle]="data.menuIconsStyle"
+					(click)="handleIconMenuAction(icon)">
+				<i-feather [name]="icon.iconName"
+						   [ngStyle]="itemButtonIconStyles">
+				</i-feather>
+			</button>
+		</span>
+	</div>
+</ng-template>
+
+<ng-template #labelMenu
+			 let-data>
+	<div class="label-menu">
+		<span *ngFor="let item of data.menuLabelList; let i = index"
+			  class="label-menu__item"
+			  [attr.disabled]="item.disable ? '' : null">
+			<button [id]="'menuButton__'+i"
+					class="label-menu__item__button"
+					[attr.disabled]="item.disable ? 'true' : null"
+					(click)="handleLabelMenuItemClick(item)">
+				<label>{{item.label}}</label>
+			</button>
+		</span>
+	</div>
+</ng-template>

@@ -1,0 +1,91 @@
+@import '../_sass/colors.scss';
+@import '../_sass/input.scss';
+@import '../_sass/common.scss';
+@import '../_sass/scrollbar.scss';
+@import '../_sass/shadows.scss';
+
+
+
+@include theosMargins();
+
+.th-ipt__hidden {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  appearance: none;
+}
+
+.th-ipt__hidden:focus {
+  outline: none;
+  box-shadow: unset !important;
+  + .th-ipt {
+    @include shadow-outline();
+  }
+}
+
+.th-ipt__contact {
+  padding-right: 135px;
+}
+
+.dialog-mensagem {
+  .dialog-mensagem__body {
+    padding: 12px 24px;
+  }
+  .dialog-mensagem__footer {
+    display: flex;
+    padding: 0px 12px 12px 12px;
+    theos-button:not(:first-of-type) {
+      margin-left: 4px;
+    }
+  }
+}
+
+.th-ipt__cep {
+  position: absolute;
+  right: -4px;
+  top: -10px;
+  z-index: 2;
+
+  button {
+    background-color: $theos__white;
+    border: none;
+    border-radius: toRem(3);
+    cursor: pointer;
+    margin-right: toRem(12);
+    padding: 0;
+
+    &:focus {
+      @include shadow-outline();
+      outline: none;
+    }
+  }
+
+  i-feather {
+    display: grid;
+    width: 20px;
+    height: 20px;
+    color: $theos__gray_600;
+  }
+}
+
+.btn-manage-contact {
+  position: absolute;
+  overflow: hidden;
+  right: 0px;
+  top: 0px;
+  font-size: 12px;
+  width: 130px;
+  background-color: $theos__primary;
+  color: white;
+  padding: 8px 4px;
+  height: 32px;
+  text-align: center;
+  border-radius: 0px 2px 2px 0px;
+  cursor: pointer;
+  &.disabled {
+	background:$theos__gray_400 !important;
+    color: $theos__gray_500 !important;
+    pointer-events: none !important;
+    box-shadow: none !important;
+  }
+}

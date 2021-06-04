@@ -1,0 +1,130 @@
+$base-multiplier: 2;
+$length: 60; //max 120
+
+@mixin theosMargins {
+  @for $i from 0 through $length {
+    $value: $base-multiplier * $i;
+    .th-mt-#{$value} {
+      margin-top: #{$value}px !important;
+    }
+
+    .th-mr-#{$value} {
+      margin-right: #{$value}px !important;
+    }
+
+    .th-mb-#{$value} {
+      margin-bottom: #{$value}px !important;
+    }
+    .th-ml-#{$value} {
+      margin-left: #{$value}px !important;
+    }
+
+    .th-mx-#{$value} {
+      margin-left: #{$value}px !important;
+      margin-right: #{$value}px !important;
+    }
+
+    .th-my-#{$value} {
+      margin-top: #{$value}px !important;
+      margin-bottom: #{$value}px !important;
+    }
+
+    .th-m-#{$value} {
+      margin: #{$value}px !important;
+    }
+  }
+}
+
+@mixin theosNegativeMargins {
+  @for $i from 0 through $length {
+    $value: $base-multiplier * $i;
+    .th-mt-neg-#{$value} {
+      margin-top: #{-$value}px !important;
+    }
+
+    .th-mr-neg-#{$value} {
+      margin-right: #{-$value}px !important;
+    }
+
+    .th-mb-neg-#{$value} {
+      margin-bottom: #{-$value}px !important;
+    }
+    .th-ml-neg-#{$value} {
+      margin-left: #{-$value}px !important;
+    }
+
+    .th-mx-neg-#{$value} {
+      margin-left: #{-$value}px !important;
+      margin-right: #{-$value}px !important;
+    }
+
+    .th-my-neg-#{$value} {
+      margin-top: #{-$value}px !important;
+      margin-bottom: #{-$value}px !important;
+    }
+
+    .th-m-neg-#{$value} {
+      margin: #{-$value}px !important;
+    }
+  }
+}
+
+@mixin theosPaddings {
+  @for $i from 0 through $length {
+    $value: $base-multiplier * $i;
+    .th-pt-#{$value} {
+      padding-top: #{$value}px !important;
+    }
+
+    .th-pr-#{$value} {
+      padding-right: #{$value}px !important;
+    }
+
+    .th-pb-#{$value} {
+      padding-bottom: #{$value}px !important;
+    }
+    .th-pl-#{$value} {
+      padding-left: #{$value}px !important;
+    }
+
+    .th-px-#{$value} {
+      padding-left: #{$value}px !important;
+      padding-right: #{$value}px !important;
+    }
+
+    .th-py-#{$value} {
+      padding-top: #{$value}px !important;
+      padding-bottom: #{$value}px !important;
+    }
+
+    .th-p-#{$value} {
+      padding: #{$value}px !important;
+    }
+  }
+}
+
+@mixin mobile {
+  @media screen and(max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and(min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin theosButtonsGroup {
+  .th-buttons-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    theos-button {
+      &:not(:last-of-type) {
+        padding-right: 4px;
+      }
+    }
+  }
+}

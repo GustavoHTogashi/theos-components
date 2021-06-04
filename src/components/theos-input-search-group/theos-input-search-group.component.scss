@@ -1,0 +1,126 @@
+@import '../_sass/colors.scss';
+@import '../_sass/input.scss';
+@import '../_sass/units.scss';
+@import '../_sass/shadows.scss';
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+.th-ipt-search-group__wrapper {
+  display: grid;
+  grid-template-columns: calc(8.333333% * 4) calc(8.333333% * 8);
+  position: relative;
+}
+
+.th-ipt {
+  &.code {
+    border-radius: toRem(3) 0 0 toRem(3);
+
+    padding: toRem(0) toRem(48) 0 toRem(12) !important;
+    z-index: 0;
+
+    &:disabled {
+      ~ .th-ipt-search__actions {
+        i-feather {
+          color: $theos__gray_500;
+        }
+      }
+    }
+
+    &:focus {
+      z-index: 1;
+      ~ .th-ipt__label {
+        z-index: 2;
+        max-width: calc(#{$percent__max} - #{toRem(8)});
+      }
+    }
+    &[has-value] {
+      ~ .th-ipt__label {
+        max-width: calc(#{$percent__max} - #{toRem(8)});
+      }
+    }
+
+    ~ .th-ipt__label {
+      max-width: calc(#{$percent__max} - #{toRem(32)});
+    }
+  }
+
+  &.description {
+    border-left: 0;
+    border-radius: 0 toRem(3) toRem(3) 0;
+
+    padding: toRem(0) toRem(84) 0 toRem(12) !important;
+    z-index: 0;
+
+    &:disabled {
+      &[has-value] {
+        ~ .th-ipt__label {
+          max-width: calc(#{$percent__max} - #{toRem(32)});
+        }
+      }
+
+      ~ .th-ipt-search__actions {
+        i-feather {
+          color: $theos__gray_500;
+        }
+      }
+    }
+
+    &:focus {
+      z-index: 1;
+    }
+
+    &:focus,
+    &[has-value] {
+      ~ .th-ipt__label {
+        max-width: calc(#{$percent__max} - #{toRem(32)});
+        z-index: 2;
+      }
+    }
+
+    ~ .th-ipt__label {
+      max-width: calc(#{$percent__max} - #{toRem(84)});
+    }
+  }
+}
+
+.th-ipt-search__actions {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  right: 0;
+  z-index: 2;
+
+  button:nth-child(n) {
+    background-color: $theos__white;
+    border: none;
+    border-radius: toRem(3);
+    margin-right: toRem(12);
+    padding: 0;
+  }
+
+  button:hover {
+    cursor: pointer;
+  }
+
+  button:focus {
+    @include shadow-outline();
+    outline: none;
+  }
+
+  i-feather {
+    display: grid;
+    width: 20px;
+    height: 20px;
+    color: $theos__gray_600;
+  }
+}
+
+// .disabled {
+//   opacity: 0.5;
+
+//   // TODO verificar se é necessário e remover
+//   user-select: none !important;
+//   pointer-events: none !important;
+// }

@@ -1,0 +1,201 @@
+<section class="th-search-dialog"
+		 [id]="prefix+'__'+data.id">
+	<header class="th-search-dialog__header">
+		<span class="th-search-dialog__title">
+			{{data.title}}
+		</span>
+		<span class="th-search-dialog__header_actions">
+			<a class="th-search-dialog__header_icon"
+			   (click)="handleClose()">
+				<i-feather name="x"
+						   style="color: #ffffff;">
+				</i-feather>
+			</a>
+		</span>
+	</header>
+
+	<div class="th-search-dialog__body">
+		<div class="th-search-dialog__filters th-my-10">
+			<!-- <theos-select [control]="C('field')"
+						  [options]="data.filters.fields"
+						  [label]="'Campo'"
+						  [id]="'th-search-dialog__filter'">
+			</theos-select>
+
+			<theos-select [control]="C('fieldOption')"
+						  [options]="fieldOptions"
+						  [label]="'Condição'"
+						  [id]="'th-search-dialog__filterOption'">
+			</theos-select> -->
+
+			<ng-container cdkPortalOutlet></ng-container>
+
+			<!-- <theos-button #searchBtn
+						  [config]="{icon: '', label: 'Pesquisar',background: '#2D3748', height: 32}"
+						  (buttonClick)="handleSearch(1)">
+			</theos-button>
+		</div>
+		<div class="th-search-dialog__filters th-mb-10"
+			 *ngIf="data.showOrganismOption">
+			<theos-checkbox [control]="C('showOrganism')"
+							[label]="'Exibe paróquias'"
+							[id]="'th-search-dialog__show-organism__checkbox'">
+			</theos-checkbox>
+		</div>
+		<div class="th-search-dialog__multi-filters th-mb-10"
+			 *ngIf="data.enableMultiFilterSearch">
+			<theos-checkbox [control]="C('multiFilterSearch')"
+							[label]="'Filtrar nos resultados'"
+							[id]="'th-search-dialog__multi-filters__checkbox'">
+			</theos-checkbox> -->
+			<div class="th-search-dialog__multi-filters__field">
+				<div class="th-search-dialog__multi-filters__field__filter"
+					 *ngFor="let filter of currentFilters">
+					<span [innerHtml]="filter.textCondition"></span>
+					<i-feather name="x"
+							   (click)="removeFilter(filter)"></i-feather>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="th-search-dialog__grid">
+			<ag-grid-angular id="search-dialog__grid"
+							 class="ag-theme-alpine"
+							 style="width: 1140px; height: 360px;"
+							 [gridOptions]="gridOptions">
+			</ag-grid-angular>
+		</div>
+		<theos-pagination [newResponse$]="newResponse$"
+						  (newSearch)="handleSearch($event)">
+		</theos-pagination> -->
+	</div>
+	<hr>
+	<footer class="th-search-dialog__footer th-mb-10">
+		<div class="theos-search-dialog__actions">
+			<div></div>
+			<!-- <theos-button [config]="{icon: 'check', label: 'Selecionar',background: '#38A169'}"
+						  [disable]="disableSelected"
+						  (buttonClick)="handleSelected()">
+			</theos-button>
+			<theos-button *ngIf="data?.codigoMenuWeb"
+						  [config]="{icon: 'printer', label: 'Imprimir',background: '#415D87'}"
+						  (buttonClick)="handlePrint()">
+			</theos-button>
+			<theos-button [config]="{label: 'Sair', icon: 'log-out', color: '#415D87', background: '#fff', border: '1px solid #415D87'}"
+						  (buttonClick)="handleClose()">
+			</theos-button> -->
+		</div>
+	</footer>
+</section>
+
+<ng-template #text>
+	<!-- <theos-input #searchValue
+				 [control]="C('searchValue')"
+				 [label]="'Busca'"
+				 [id]="'th-search-dialog__search-value'"
+				 (keyup.enter)="handleSearch()">
+	</theos-input> -->
+</ng-template>
+<ng-template #textInterval>
+	<div class="grid__col-2_row-1">
+		<!-- <theos-input #searchValue
+					 [control]="C('searchValue')"
+					 [label]="'Termo inicial'"
+					 [id]="'th-search-dialog__search-value__initial'">
+		</theos-input>
+		<theos-input #searchValueEnd
+					 [control]="C('searchValueEnd')"
+					 [label]="'Termo final'"
+					 [id]="'th-search-dialog__search-value__final'"
+					 (keyup.enter)="handleSearch()">
+		</theos-input> -->
+	</div>
+</ng-template>
+
+<ng-template #numeric>
+	<!-- <theos-number #searchValue
+				  [control]="C('searchValue')"
+				  [label]="'Busca'"
+				  [id]="'th-search-dialog__search-value'"
+				  (keyup.enter)="handleSearch()">
+	</theos-number> -->
+</ng-template>
+<ng-template #numericInterval>
+	<div class="grid__col-2_row-1">
+		<!-- <theos-number #searchValue
+					  [control]="C('searchValue')"
+					  [label]="'Termo inicial'"
+					  [id]="'th-search-dialog__search-value__initial'">
+		</theos-number>
+		<theos-number #searchValueEnd
+					  [control]="C('searchValueEnd')"
+					  [label]="'Termo final'"
+					  [id]="'th-search-dialog__search-value__final'"
+					  (keyup.enter)="handleSearch()">
+		</theos-number> -->
+	</div>
+</ng-template>
+
+<ng-template #money>
+	<!-- <theos-input #searchValue
+				 [thInputType]="'money'"
+				 [control]="C('searchValue')"
+				 [label]="'Valor'"
+				 [id]="'th-search-dialog__search-value'"
+				 (keyup.enter)="handleSearch()">
+	</theos-input> -->
+</ng-template>
+<ng-template #moneyInterval>
+	<div class="grid__col-2_row-1">
+		<!-- <theos-input #searchValue
+					 [thInputType]="'money'"
+					 [control]="C('searchValue')"
+					 [label]="'Valor inicial'"
+					 [id]="'th-search-dialog__search-value__initial'">
+		</theos-input>
+		<theos-input #searchValueEnd
+					 [thInputType]="'money'"
+					 [control]="C('searchValueEnd')"
+					 [label]="'Valor final'"
+					 [id]="'th-search-dialog__search-value__final'"
+					 (keyup.enter)="handleSearch()">
+		</theos-input> -->
+	</div>
+</ng-template>
+
+<ng-template #date>
+	<!-- <theos-date #searchValue
+				[control]="C('searchValue')"
+				[label]="'Data'"
+				[id]="'th-search-dialog__search-value'"
+				(keyup.enter)="handleSearch()">
+	</theos-date> -->
+</ng-template>
+<ng-template #dateInterval>
+	<div class="grid__col-2_row-1">
+		<!-- <theos-date #searchValue
+					[control]="C('searchValue')"
+					[label]="'Data inicial'"
+					[id]="'th-search-dialog__search-value__initial'">
+		</theos-date>
+		<theos-date #searchValueEnd
+					[control]="C('searchValueEnd')"
+					[label]="'Data final'"
+					[id]="'th-search-dialog__search-value__final'"
+					(keyup.enter)="handleSearch()">
+		</theos-date> -->
+	</div>
+</ng-template>
+
+<ng-template #textDate>
+	<!-- <theos-input #searchValue
+				 [control]="C('searchValue')"
+				 [label]="'Busca'"
+				 [id]="'th-search-dialog__search-value'"
+				 (keyup.enter)="handleSearch()">
+	</theos-input> -->
+</ng-template>
+
+<ng-template #hidden>
+	<div>
+	</div>
+</ng-template>

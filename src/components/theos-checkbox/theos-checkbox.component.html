@@ -1,0 +1,27 @@
+<span #thInputField
+	  class="th-checkbox__field"
+	  [ngClass]="{'multi-line': multiLine}">
+	<span #thCheckbox
+		  class="th-checkbox"
+		  [ngClass]="{'reverse': reverse}"
+		  [ngStyle]="style">
+		<input type="checkbox"
+			   class="th-checkbox__hidden"
+			   [id]="PREFIX+'__'+id"
+			   [attr.disabled]="control?.disabled ? '' : null"
+			   [hidden]="control?.disabled"
+			   (click)=" nullable ? handleNullableClick() : handleClick()">
+	</span>
+	<label class="th-checkbox__label"
+		   [for]="PREFIX+'__'+id"> {{label}}
+	</label>
+	<ng-container *ngIf="tooltipMessage?.length > 0">
+		<i-feather [name]="tooltipIcon"
+				   #tooltip="matTooltip"
+				   [matTooltip]="tooltipMessage"
+				   [matTooltipPosition]="'right'"
+				   [matTooltipClass]="'th-mat-tooltip info'"
+				   [matTooltipShowDelay]="300">
+		</i-feather>
+	</ng-container>
+</span>

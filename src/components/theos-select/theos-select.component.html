@@ -1,0 +1,73 @@
+<div class="th-ipt__field">
+	<!-- <select #thSelectHidden
+			class="th-select__hidden"
+				>
+	</select> -->
+	<input #thSelect
+		   [id]="PREFIX+'__'+config.id"
+		   class="th-ipt"
+		   type="button"
+		   (keydown.space)="handleSelectClick ($event)"
+		   [formControl]="config.control"
+		   [ngStyle]="config.style"
+		   [attr.filled]="config.control.value"
+		   [attr.bypass-validation]="config.bypassColorizeOnValidation ? '':  null"
+		   (click)="handleSelectClick($event)"
+		   #tooltip="matTooltip"
+		   [matTooltip]="config.tooltip?.message"
+		   [matTooltipPosition]="'above'"
+		   [matTooltipClass]="config.tooltip?.class ? config.tooltip?.class : 'th-mat-tooltip'"
+		   [matTooltipShowDelay]="300"
+		   [matTooltipDisabled]="config.control.disabled">
+	<ng-container *ngIf="config.label">
+		<label class="th-ipt__label"
+			   [for]="PREFIX+'__'+config.id">
+			<ng-container *ngIf="isRequired">
+				<span class="th-required-mark">*</span>
+			</ng-container>
+			{{config.label || ''}}
+		</label>
+	</ng-container>
+	<div class="th-ipt__actions">
+		<button type="button"
+				[attr.disabled]="config.control?.disabled ? '' : null"
+				(click)="handleChevronDownClick()">
+			<i-feather name="chevron-down"></i-feather>
+		</button>
+	</div>
+</div>
+
+<ng-template #thSelectDropdownTemplate>
+	<div #thSelectDropdown
+		 class="th-select__dropdown"
+		 (keydown)="handleKeyDown($event)">
+		<ng-container *ngIf="config.nullOptionLabel != null">
+			<button type="button"
+					class="th-select__dropdown-option"
+					(click)="handleOptionClick(null)">
+				{{config.nullOptionLabel}}&nbsp;
+			</button>
+			<!-- #tooltip="matTooltip"
+			[matTooltip]="config.nullOptionLabel"
+			[matTooltipPosition]="'above'"
+			[matTooltipClass]="config.tooltip?.class ? config.tooltip?.class : 'th-mat-tooltip small-tooltip'"
+			[matTooltipShowDelay]="600"
+			[matTooltipDisabled]="config.control.disabled"> -->
+		</ng-container>
+
+		<ng-container *ngFor="let option of config.options">
+			<button type="button"
+					class="th-select__dropdown-option"
+					(click)="handleOptionClick(option.value)">
+				{{option.label}}
+			</button>
+			<!-- #tooltip="matTooltip"
+			[matTooltip]="option.label"
+			[matTooltipPosition]="'above'"
+			[matTooltipClass]="config.tooltip?.class ? config.tooltip?.class : 'th-mat-tooltip small-tooltip'"
+			[matTooltipShowDelay]="600"
+			[matTooltipDisabled]="config.control.disabled" -->
+		</ng-container>
+		<span style="width: 100%; height: 1px;"></span>
+	</div>
+</ng-template>

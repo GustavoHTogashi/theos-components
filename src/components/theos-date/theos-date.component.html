@@ -1,0 +1,38 @@
+<div class="th-ipt__field">
+	<input #thInputDate
+		   type="text"
+		   [id]="PREFIX+'__'+config.id"
+		   class="th-ipt"
+		   [ngStyle]="config.style"
+		   [formControl]="config.control"
+		   [attr.filled]="config.control?.value ? '' : null"
+		   [attr.placeholder-visible]="isPlaceholderVisible ? '' : null"
+		   [attr.bypass-validation]="config.bypassColorizeOnValidation ? '':  null"
+		   (focus)="handleFocus()"
+		   (focusout)="handleFocusOut()"
+		   (keydown.space)="blockEvent($event)"
+		   date
+		   [dateType]="config.dateType || 0"
+		   #tooltip="matTooltip"
+		   [matTooltip]="config.tooltip?.message"
+		   [matTooltipPosition]="'above'"
+		   [matTooltipClass]="config.tooltip?.class ? config.tooltip?.class : 'th-mat-tooltip'"
+		   [matTooltipShowDelay]="300"
+		   [matTooltipDisabled]="config.control.disabled">
+	<ng-container *ngIf="config.label">
+		<label class="th-ipt__label"
+			   [for]="PREFIX+'__'+config.id">
+			<ng-container *ngIf="isRequired">
+				<span class="th-required-mark">*</span>
+			</ng-container>
+			{{config.label || ''}}
+		</label>
+	</ng-container>
+	<div class="th-ipt__actions">
+		<button type="button"
+				[attr.disabled]="config.control?.disabled ? '' : null"
+				(click)="handleCalendarClick($event)">
+			<i-feather name="calendar"></i-feather>
+		</button>
+	</div>
+</div>

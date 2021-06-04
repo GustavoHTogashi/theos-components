@@ -1,0 +1,11 @@
+<theos-input [config]="config.initial">
+</theos-input>
+<span class="th-interval__ligature"
+	  [attr.valid]="ligatureValid ? '' : null"
+	  [attr.invalid]="ligatureInvalid ? '': null"
+	  [attr.disabled]="ligatureDisabled ? '': null"
+	  [attr.bypass-validation]="ligatureBypassColorizeOnValidation ? '': null">
+	{{LIGATURE_TEXT}}
+</span>
+<theos-input [config]="config.final">
+</theos-input>

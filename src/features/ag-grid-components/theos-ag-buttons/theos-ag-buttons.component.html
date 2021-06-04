@@ -1,0 +1,15 @@
+<ng-container *ngFor="let button of buttons">
+	<button [id]="PREFIX+'__'+button.id"
+			[ngStyle]="button.style"
+			[attr.disabled]="button?.disabled ? '' : null"
+			(click)="handleClick(button.methodName)"
+			#tooltip="matTooltip"
+			[matTooltip]="button.tooltip?.message"
+			[matTooltipPosition]="'above'"
+			[matTooltipClass]="button.tooltip?.class || 'th-mat-tooltip small-tooltip'"
+			[matTooltipShowDelay]="600"
+			[matTooltipDisabled]="!button.tooltip">
+		<i-feather [name]="button.icon">
+		</i-feather>
+	</button>
+</ng-container>

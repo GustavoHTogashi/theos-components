@@ -1,0 +1,27 @@
+<span class="th-ipt__field">
+	<textarea #thTextarea
+			  [id]="PREFIX+'__'+id"
+			  class="th-ipt"
+			  [ngClass]="{'th-ipt__invalid': invalid, 'th-ipt__valid': valid}"
+			  [formControl]="control"
+			  [attr.has-value]="hasValue"
+			  [ngStyle]="style"
+			  [placeholder]=""
+			  [maxLength]="maxLength"
+			  [rows]="maxRows"
+			  wrap="hard"
+			  (focus)="handleFocus()"
+			  (blur)="handleFocusOut()">
+	</textarea>
+	<label class="th-ipt__label"
+		   [for]="PREFIX+'__'+id"> {{label}}
+		<ng-container *ngIf="isRequired">
+			<strong>*</strong>
+		</ng-container>
+
+	</label>
+	<span #content
+		  class="th-ipt__dynamic-content">
+		<ng-content></ng-content>
+	</span>
+</span>

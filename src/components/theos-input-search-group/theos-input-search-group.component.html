@@ -1,0 +1,64 @@
+<span #thInputField
+	  class="th-ipt-search-group__wrapper"
+	  [formGroup]="group">
+	<span class="th-ipt__field">
+		<input #thInputSearchCode
+			   number-only
+			   formControlName="codigo"
+			   [id]="prefix+'__'+id+'__code'"
+			   type="text"
+			   [attr.has-value]="codeHasValue"
+			   class="th-ipt code"
+			   [ngClass]="{'th-ipt__invalid': invalid, 'th-ipt__valid': valid}"
+			   [placeholder]=""
+			   (focus)="handleFocus(thInputSearchCode, CODE)"
+			   (focusout)="handleFocusOut(thInputSearchCode, CODE)"
+			   (keyup)="handleKeyup($event, thInputSearchCode, CODE)">
+		<label class="th-ipt__label"
+			   [for]="id"> {{label.code}}<strong *ngIf="hasValidator && label.code">*</strong>
+		</label>
+
+		<span class="th-ipt-search__actions">
+			<button type="button"
+					class="th-ipt-search__btn-search"
+					[ngClass]="{'disabled': disabled}"
+					[attr.disabled]="disabled ? '' : null"
+					(click)="handleSearch(true, thInputSearchCode, CODE)">
+				<i-feather name="search"></i-feather>
+			</button>
+		</span>
+	</span>
+	<span class="th-ipt__field">
+		<input #thInputSearchDescription
+			   formControlName="descricao"
+			   [id]="prefix+'__'+id+'__description'"
+			   type="text"
+			   [attr.has-value]="descriptionHasValue"
+			   class="th-ipt description"
+			   [ngClass]="{'th-ipt__invalid': invalid, 'th-ipt__valid': valid}"
+			   [placeholder]=""
+			   (focus)="handleFocus(thInputSearchDescription, DESCRIPTION)"
+			   (focusout)="handleFocusOut(thInputSearchDescription, DESCRIPTION)"
+			   (keyup)="handleKeyup($event, thInputSearchDescription,DESCRIPTION)">
+		<label class="th-ipt__label"
+			   [for]="id"> {{label.description}}<strong *ngIf="hasValidator && label.description">*</strong>
+		</label>
+
+		<span class="th-ipt-search__actions">
+			<button type="button"
+					class="th-ipt-search__btn-remove"
+					[ngClass]="{'disabled': disabled}"
+					[attr.disabled]="disabled ? '' : null"
+					(click)="handleRemove()">
+				<i-feather name="x"></i-feather>
+			</button>
+			<button type="button"
+					class="th-ipt-search__btn-search"
+					[ngClass]="{'disabled': disabled}"
+					[attr.disabled]="disabled ? '' : null"
+					(click)="handleSearch(true, thInputSearchDescription, DESCRIPTION)">
+				<i-feather name="search"></i-feather>
+			</button>
+		</span>
+	</span>
+</span>

@@ -1,0 +1,47 @@
+<section class="th-search-dialog"
+		 [id]="prefix+'__'+data.id">
+	<header class="th-search-dialog__header">
+		<span class="th-search-dialog__title">
+			{{data.title}}
+		</span>
+		<span class="th-search-dialog__header_actions">
+			<a class="th-search-dialog__header_icon"
+			   (click)="handleClose()">
+				<i-feather name="x"
+						   style="color: #ffffff;">
+				</i-feather>
+			</a>
+		</span>
+	</header>
+
+	<div class="th-search-dialog__body">
+		<!-- <ng-content select="[filters]">
+		</ng-content> -->
+		<div class="th-search-dialog__grid">
+			<!-- <ag-grid-angular id="search-dialog__grid"
+							 class="ag-theme-alpine"
+							 style="width: 1140px; height: 280px;"
+							 [gridOptions]="gridOptions">
+			</ag-grid-angular> -->
+		</div>
+		<!-- <theos-pagination [newResponse$]="newResponse$"
+						  (newSearch)="handleSearch($event)">
+		</theos-pagination> -->
+	</div>
+	<hr>
+	<footer class="th-search-dialog__footer th-mb-10">
+		<div class="theos-search-dialog__actions">
+			<!-- <theos-button [config]="{icon: 'check', label: 'Selecionar',background: '#38A169'}"
+						  [disable]="disableSelected"
+						  (buttonClick)="handleSelected()">
+			</theos-button>
+			<theos-button *ngIf="data?.codigoMenuWeb"
+						  [config]="{icon: 'printer', label: 'Imprimir',background: '#415D87'}"
+						  (buttonClick)="handlePrint()">
+			</theos-button>
+			<theos-button (buttonClick)="handleClose()"
+						  [config]="{label: 'Sair', icon: 'log-out', color: '#415D87', background: '#fff', border: '1px solid #415D87'}">
+			</theos-button> -->
+		</div>
+	</footer>
+</section>

@@ -1,0 +1,13 @@
+p {
+  animation: fadeInOut 0.3s ease-in-out both;
+}
+
+@keyframes fadeInOut {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,11 @@
+<theos-date [config]="config.initial">
+</theos-date>
+<span class="th-interval__ligature"
+	  [attr.valid]="ligatureValid ? '' : null"
+	  [attr.invalid]="ligatureInvalid ? '': null"
+	  [attr.disabled]="ligatureDisabled ? '': null"
+	  [attr.bypass-validation]="ligatureBypassColorizeOnValidation ? '': null">
+	{{LIGATURE_TEXT}}
+</span>
+<theos-date [config]="config.final">
+</theos-date>

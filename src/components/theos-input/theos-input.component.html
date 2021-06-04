@@ -1,0 +1,73 @@
+<div class="th-ipt__field">
+	<ng-container [ngSwitch]="config.inputType">
+		<ng-container *ngSwitchCase="INPUT_TYPE.text">
+			<ng-container *ngTemplateOutlet="text"></ng-container>
+		</ng-container>
+		<ng-container *ngSwitchCase=" INPUT_TYPE.money">
+			<ng-container *ngTemplateOutlet="money"></ng-container>
+		</ng-container>
+		<ng-container *ngSwitchDefault>
+			<ng-container *ngTemplateOutlet="text"></ng-container>
+		</ng-container>
+	</ng-container>
+
+	<ng-container *ngIf="config.label">
+		<label class="th-ipt__label"
+			   [for]="PREFIX+'__'+config.id">
+			<ng-container *ngIf="isRequired">
+				<span class="th-required-mark">*</span>
+			</ng-container>
+			{{config.label || ''}}
+		</label>
+	</ng-container>
+
+	<div #thInputActions
+		 class="th-ipt__actions">
+		<ng-content></ng-content>
+	</div>
+</div>
+
+<ng-template #text>
+	<input #thInput
+		   type="text"
+		   [id]="PREFIX+'__'+config.id"
+		   class="th-ipt"
+		   [ngStyle]="config.style"
+		   [formControl]="config.control"
+		   [attr.filled]="config.control?.value ? '': null"
+		   [attr.placeholder-visible]="isPlaceholderVisible ? '' : null"
+		   [attr.bypass-validation]="config.bypassColorizeOnValidation ? '':  null"
+		   (focus)="handleFocus()"
+		   (focusout)="handleFocusOut()"
+		   [maxlength]="config.maxLength"
+		   [mask]="config.ngxMask?.mask"
+		   [validation]="config.ngxMask?.validation || false"
+		   [dropSpecialCharacters]="config.ngxMask?.dropSpecialCharacters"
+		   #tooltip="matTooltip"
+		   [matTooltip]="config.tooltip?.message"
+		   [matTooltipPosition]="'above'"
+		   [matTooltipClass]="config.tooltip?.class ? config.tooltip?.class : 'th-mat-tooltip'"
+		   [matTooltipShowDelay]="300"
+		   [matTooltipDisabled]="config.control.disabled">
+</ng-template>
+
+<ng-template #money>
+	<input #thInput
+		   type="text"
+		   [id]="PREFIX+'__'+config.id"
+		   class="th-ipt"
+		   [ngStyle]="config.style"
+		   [formControl]="config.control"
+		   [attr.filled]="config.control?.value ? '' : null"
+		   [attr.placeholder-visible]="isPlaceholderVisible ? '' : null"
+		   [attr.bypass-validation]="config.bypassColorizeOnValidation ? '':  null"
+		   (focus)="handleFocus()"
+		   (focusout)="handleFocusOut()"
+		   money
+		   #tooltip="matTooltip"
+		   [matTooltip]="config.tooltip?.message"
+		   [matTooltipPosition]="'above'"
+		   [matTooltipClass]="config.tooltip?.class ? config.tooltip?.class : 'th-mat-tooltip'"
+		   [matTooltipShowDelay]="300"
+		   [matTooltipDisabled]="config.control.disabled">
+</ng-template>

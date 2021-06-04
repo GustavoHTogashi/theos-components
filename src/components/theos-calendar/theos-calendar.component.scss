@@ -1,0 +1,250 @@
+@import "../../assets/styles/animations.scss";
+@import "../../assets/styles/units.scss";
+@import "../../assets/styles/typography.scss";
+
+* {
+  user-select: none;
+}
+
+:host {
+  position: relative;
+  max-height: $percent__max;
+  display: flex;
+}
+
+.th-calendar {
+  display: flex;
+  position: absolute;
+  border: toRem(1) solid var(--gray-700);
+  min-width: 296px;
+  min-height: 312px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: toRem(3);
+  background: var(--theos-white);
+
+  opacity: 1;
+  user-select: none;
+  z-index: 10;
+}
+
+@keyframes fromTop {
+  from {
+    transform: translateY(toRem(-20));
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fromBottom {
+  from {
+    transform: translateY(toRem(20));
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.th-calendar__container {
+  width: $percent__max;
+  height: $percent__max;
+  display: block;
+  opacity: 1;
+}
+
+.th-calendar__header {
+  width: $percent__max;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: toRem(8);
+  background: var(--theos-white);
+  border-radius: toRem(3);
+
+  .period__selector {
+    // @include ui-text();
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    font-size: toRem(14);
+    font-weight: bold;
+
+    color: var(--gray-700);
+    padding: 0 toRem(8);
+    border: none;
+    border-radius: toRem(3);
+    background: var(--theos-white);
+    transition: all $th-animation-duration $th-animation-timing-function;
+
+    img {
+      padding: 0 toRem(4);
+    }
+
+    &:hover {
+      background: var(--gray-400);
+    }
+  }
+
+  .nav__arrows {
+    height: toRem(24);
+
+    i-feather {
+      display: grid;
+      place-items: center;
+      width: toRem(20);
+      height: toRem(20);
+      stroke-width: toRem(2);
+    }
+
+    button {
+      border: none;
+      border-radius: toRem(3);
+      background: var(--theos-white);
+      transition: all $th-animation-duration $th-animation-timing-function;
+      margin: 0 toRem(2);
+    }
+
+    button:hover {
+      background: var(--gray-400);
+    }
+  }
+}
+
+.th-calendar__body {
+  width: $percent__max;
+
+  .week__header {
+    color: var(--gray-700);
+    font-size: 11px;
+    font-weight: bold;
+    padding: toRem(8) toRem(8) 0;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: toRem(15);
+    width: $percent__max;
+    justify-items: center;
+    align-content: center;
+    opacity: 0.6;
+
+    .week_days {
+      font-style: normal;
+    }
+  }
+
+  hr {
+    margin: toRem(8) 0;
+    background: var(--gray-700);
+    opacity: 0.6;
+  }
+
+  .th-calendar__content {
+    padding: toRem(8);
+    width: $percent__max;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: toRem(2);
+
+    align-items: center;
+    justify-items: center;
+
+    button {
+      background: var(--theos-white);
+      width: toRem(36);
+      border-radius: toRem(3);
+      border: none;
+      text-align: center;
+      padding: toRem(4);
+      color: var(--gray-700);
+      transition: all $th-animation-duration $th-animation-timing-function;
+    }
+
+    button:hover {
+      background: var(--gray-400);
+    }
+  }
+
+  .th-calendar-year__content {
+    padding: toRem(8);
+    width: $percent__max;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: toRem(2);
+
+    align-items: center;
+    justify-items: center;
+
+    button {
+      background: var(--theos-white);
+      width: $percent__max;
+      border-radius: toRem(3);
+      border: none;
+      text-align: center;
+      padding: toRem(4);
+      color: var(--gray-700);
+      transition: all $th-animation-duration $th-animation-timing-function;
+    }
+
+    button:hover {
+      background: var(--gray-400);
+    }
+  }
+}
+
+button:focus,
+button:active {
+  border: none;
+  outline: none;
+}
+
+.current {
+  border: 1px solid var(--gray-700) !important;
+}
+
+.selected {
+  background-color: var(--gray-400) !important;
+}
+
+.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}

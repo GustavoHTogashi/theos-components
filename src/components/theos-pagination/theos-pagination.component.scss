@@ -1,0 +1,142 @@
+@import '../_sass/colors.scss';
+@import '../_sass/common.scss';
+@import '../_sass/shadows.scss';
+
+@include theosMargins();
+
+:host {
+  width: 100%;
+}
+
+.th-search-dialog__pages {
+  padding: 0 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+  user-select: none;
+}
+
+ul {
+  display: flex;
+  flex-direction: row;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.08),
+    0px 4px 6px rgba(45, 47, 64, 0.11);
+  user-select: none;
+
+  .btn__ {
+    height: 32px;
+    width: 32px;
+
+    border-top: 1px;
+    border-bottom: 1px;
+    border-right: 1px;
+    border-left: 0px;
+    border-color: $theos__gray_700;
+    border-style: solid;
+
+    color: $theos__gray_700;
+    background: $theos__gray_100;
+
+    position: relative;
+
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.2s ease-out;
+
+    &.selected {
+      background-color: $theos__green_600;
+      color: $theos__white;
+    }
+  }
+
+  button:focus,
+  button:active {
+    @include shadow-outline();
+  }
+
+  button:hover {
+    cursor: pointer;
+    filter: brightness(0.9);
+    transition: all 0.15s ease-in;
+  }
+
+  .btn__first {
+    height: 32px;
+
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+
+    border-top: 1px;
+    border-bottom: 1px;
+    border-right: 1px;
+    border-left: 1px;
+    border-color: $theos__gray_700;
+    border-style: solid;
+
+    color: $theos__gray_700;
+    background: $theos__gray_100;
+
+    padding: 0 12px;
+
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.2s ease-out;
+  }
+
+  .btn__last {
+    height: 32px;
+
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+
+    border-top: 1px;
+    border-bottom: 1px;
+    border-right: 1px;
+    border-left: 0px;
+    border-color: $theos__gray_700;
+    border-style: solid;
+
+    color: $theos__gray_700;
+    background: $theos__gray_100;
+
+    padding: 0 12px;
+
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.2s ease-out;
+  }
+
+  .btn__chevron {
+    height: 32px;
+    width: 32px;
+
+    border-top: 1px;
+    border-bottom: 1px;
+    border-right: 1px;
+    border-left: 0px;
+    border-color: $theos__gray_700;
+    border-style: solid;
+
+    padding: 0 8px;
+
+    color: $theos__gray_700;
+    background: $theos__gray_100;
+
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.2s ease-out;
+  }
+
+  i-feather {
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    stroke-width: 3;
+  }
+}

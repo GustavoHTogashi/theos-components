@@ -1,0 +1,216 @@
+<!-- <span class="th-ipt__field"
+	  #tooltip="matTooltip"
+	  [matTooltip]="tooltipInputValue"
+	  [matTooltipPosition]="'above'"
+	  [matTooltipShowDelay]="300"
+	  [matTooltipDisabled]="inputValue === NO_ADDRESS_TEXT">
+	<input #thInputFake
+		   type="checkbox"
+		   class="th-ipt__hidden"
+		   [hidden]="control.disabled">
+	<input #thInput
+		   [id]="PREFIX+'__'+id"
+		   class="th-ipt th-ipt__address"
+		   [ngClass]="{'th-ipt__invalid': invalid, 'th-ipt__valid': valid}"
+		   [attr.has-value]="true"
+		   [disabled]="true"
+		   [ngStyle]="style"
+		   [placeholder]="placeholder"
+		   [value]="inputValue"
+		   type="text">
+	<div [id]="PREFIX+'__'+id+'__gerenciar-enderecos'"
+		 [ngClass]="{'disabled': control.disabled}"
+		 class="btn-manage-address"
+		 (click)="handleButtonClick('_open')">
+		{{(control.value?.length > 0? 'Gerenciar' : 'Adicionar') + ' endereços'}}
+	</div>
+	<label class="th-ipt__label"
+		   [for]="PREFIX+'__'+id"> {{label}}<strong *ngIf="isRequired">*</strong>
+	</label>
+</span>
+
+<ng-template #dialogAddress>
+	<theos-dialog [id]="PREFIX+'__'+id+'__dialog-address'"
+				  [title]="'Gerenciar endereços'"
+				  (close)="handleClose()">
+		<div dialogBody
+			 class="container dialog-body">
+			<form [formGroup]="fg"
+				  theosCustomFocus>
+				<div class="row th-mt-16">
+					<div class="col-12 col-md-4">
+						<theos-select [id]="PREFIX+'__'+id+'__tipo-endereco'"
+									  [label]="'Tipo de endereço'"
+									  [control]="c('enderecoTipoId')"
+									  [options]="tipoEndereco"
+									  [nullable]="true"></theos-select>
+					</div>
+					<div class="col-12 col-md-2 pl-0">
+						<theos-input [id]="PREFIX+'__'+id+'__cep'"
+									 [label]="'CEP'"
+									 [control]="cAddress('cep')"
+									 [customMask]="'00000-000'"
+									 [customMaskDropSpecialCharacters]="true">
+							<div class="th-ipt__cep">
+								<button type="button"
+										[id]="PREFIX+'__'+id+'__cep'"
+										class="btn-cep"
+										(click)="handleClick('_searchCEP')">
+									<i-feather name="map"></i-feather>
+								</button>
+							</div>
+						</theos-input>
+					</div>
+					<div class="col-12 col-md-6 pl-0">
+						<theos-input [id]="PREFIX+'__'+id+'__logradouro'"
+									 [label]="'Logradouro'"
+									 [control]="cAddress('logradouro')"></theos-input>
+					</div>
+				</div>
+				<div class="row th-mt-16">
+					<div class="col-12 col-md-4">
+						<theos-input [id]="PREFIX+'__'+id+'__complemento'"
+									 [label]="'Complemento'"
+									 [control]="cAddress('complemento')"></theos-input>
+					</div>
+					<div class="col-12 col-md-2 pl-0">
+						<theos-input [id]="PREFIX+'__'+id+'__caixa-postal'"
+									 [label]="'Caixa postal'"
+									 [control]="cAddress('caixaPostal')"></theos-input>
+					</div>
+					<div class="col-12 col-md-3 pl-0">
+						<theos-input [id]="PREFIX+'__'+id+'__bairro'"
+									 [label]="'Bairro'"
+									 [control]="cAddress('bairro')"></theos-input>
+					</div>
+					<div class="col-12 col-md-2 pl-0">
+						<theos-input [id]="PREFIX+'__'+id+'__cidade'"
+									 [label]="'Cidade'"
+									 [control]="cAddress('cidade')"></theos-input>
+					</div>
+					<div class="col-12 col-md-1 pl-0">
+						<theos-input [customMask]="'S{2}'"
+									 [id]="PREFIX+'__'+id+'__estado'"
+									 [label]="'Estado'"
+									 [control]="cAddress('estado')"></theos-input>
+					</div>
+				</div>
+				<div class="row th-mt-16">
+					<div class="col-12 col-md-6">
+						<theos-checkbox [id]="PREFIX+'__'+id+'__principal'"
+										[label]="'Este é o endereço principal'"
+										[control]="c('ehPrincipal')"></theos-checkbox>
+					</div>
+					<div class="offset-2 col-2">
+						<theos-button [id]="PREFIX+'__'+id+'__adicionar-endereco'"
+									  [config]="{label: windowStatusCurrent === windowStatus.create? 'Adicionar' : 'Salvar', color: '#fff', background: '#30C85B', height: '32'}"
+									  (buttonClick)="handleButtonClick('_save')">
+						</theos-button>
+					</div>
+					<div class="col-2">
+						<theos-button [id]="PREFIX+'__'+id+'__cancelar-endereco'"
+									  [config]="{label: 'Cancelar', color: '#415D87', background: '#fff', border: '1px solid #415D87', height: '32'}"
+									  (buttonClick)="handleButtonClick('_cancel')">
+						</theos-button>
+					</div>
+				</div>
+				<div class="row th-mt-16">
+					<div class="col-12">
+						<ag-grid-angular [gridOptions]="gridOptions"
+										 class="ag-theme-alpine"
+										 style="width: 100%; height: 270px;">
+						</ag-grid-angular>
+					</div>
+				</div>
+				<div class="row th-mt-16">
+					<div class="offset-5 col-2">
+						<theos-button [id]="PREFIX+'__'+id+'__confirmar'"
+									  [config]="{icon: 'check-circle', label: 'Confirmar', color: '#fff', background: '#30C85B', width: '160'}"
+									  (buttonClick)="handleButtonClick('_confirm')">
+						</theos-button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</theos-dialog>
+</ng-template>
+
+<ng-template #confirmDelete>
+	<theos-dialog class="dialog-mensagem"
+				  [id]="PREFIX+'__'+id+'__confirm-delete'"
+				  [title]="'Atenção'"
+				  (close)="handleClose(confirmDeleteInstance)">
+		<div dialogBody>
+			<div class="dialog-mensagem__body"> <span>
+					Deseja realmente excluir este endereço?
+				</span></div>
+		</div>
+		<div dialogFooter>
+			<div class="dialog-mensagem__footer">
+				<theos-button (buttonClick)="handleButtonClick('_confirmDelete')"
+							  [id]="PREFIX+'__'+id+'__confirm-delete__excluir'"
+							  [config]="{label: 'Excluir', icon: 'trash-2', color: '#fff', background: '#F35252'}">
+				</theos-button>
+				<theos-button (buttonClick)="handleButtonClick('handleClose', confirmDeleteInstance)"
+							  [id]="PREFIX+'__'+id+'__confirm-delete__saie'"
+							  [config]="{label: 'Sair', icon: 'log-out', color: '#415D87', background: '#fff', border: '1px solid #415D87'}">
+				</theos-button>
+			</div>
+		</div>
+
+	</theos-dialog>
+</ng-template>
+
+<ng-template #confirmDeleteHasDefault>
+	<theos-dialog class="dialog-mensagem"
+				  [id]="PREFIX+'__'+id+'__confirm-delete-has-default'"
+				  [title]="'Atenção'"
+				  (close)="handleClose(confirmDeleteHasDefaultInstance)">
+		<div dialogBody>
+			<div class="dialog-mensagem__body"><span>
+					Você não pode excluir o endereço principal enquanto existirem outros endereços cadastrados do mesmo
+					tipo. Por
+					favor,
+					troque de endereço principal antes de realizar esta operação.
+				</span></div>
+		</div>
+		<div dialogFooter>
+			<div class="dialog-mensagem__footer">
+				<theos-button (buttonClick)="handleButtonClick('handleClose', confirmDeleteHasDefaultInstance)"
+							  [id]="PREFIX+'__'+id+'__confirm-delete-has-default__sair'"
+							  [config]="{label: 'Sair', icon: 'log-out', color: '#415D87', background: '#fff', border: '1px solid #415D87'}">
+				</theos-button>
+			</div>
+		</div>
+
+	</theos-dialog>
+</ng-template>
+
+<ng-template #confirmHasDefault>
+	<theos-dialog class="dialog-mensagem"
+				  [id]="PREFIX+'__'+id+'__confirm-has-default'"
+				  [title]="'Atenção'"
+				  (close)="handleClose(confirmHasDefaultInstance)">
+		<div dialogBody>
+			<div class="dialog-mensagem__body">
+				<span>
+					Já existe um endereço deste tipo salvo como principal, tem certeza que deseja adicionar esse
+					endereço como novo
+					principal?
+				</span></div>
+		</div>
+		<div dialogFooter>
+			<div class="dialog-mensagem__footer">
+				<theos-button (buttonClick)="handleButtonClick('_confirmHasDefault')"
+							  [id]="PREFIX+'__'+id+'__confirm-has-default__confirmar'"
+							  [config]="{label: 'Confirmar', icon: 'check-circle', color: '#fff', background: '#30C85B'}">
+				</theos-button>
+				<theos-button (buttonClick)="handleButtonClick('handleClose', confirmHasDefaultInstance)"
+							  [id]="PREFIX+'__'+id+'__confirm-has-default__sair'"
+							  [config]="{label: 'Sair', icon: 'log-out', color: '#415D87', background: '#fff', border: '1px solid #415D87'}">
+				</theos-button>
+			</div>
+		</div>
+
+	</theos-dialog>
+</ng-template> -->

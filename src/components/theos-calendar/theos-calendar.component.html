@@ -1,0 +1,84 @@
+<div #thCalendar
+	 class="th-calendar">
+	<div class="th-calendar__container"
+		 #daysCalendar>
+		<div class="th-calendar__header">
+			<button (click)="handleSelector(cType.day)"
+					class="period__selector">{{periodMonth | uppercase}}
+				<i-feather name="chevron-down"></i-feather>
+			</button>
+			<span class="nav__arrows"
+				  *ngIf="dateType !== DateTypeEnum.DayAndMonth">
+				<button (click)="handlePrevious(cType.day)">
+					<i-feather name="chevron-left"></i-feather>
+				</button>
+				<button (click)="handleNext(cType.day)">
+					<i-feather name="chevron-right"></i-feather>
+				</button>
+			</span>
+		</div>
+		<div class="th-calendar__body">
+			<span class="week__header">
+				<i *ngFor="let weekDay of weekDays"
+				   class="week_days">{{weekDay.charAt(0) | uppercase}}</i>
+			</span>
+			<hr>
+			<div class="th-calendar__content">
+				<button *ngFor="let item of days"
+						(click)="handleSelectedDay(item.day)"
+						[ngClass]="{'current': cDay === item.day && !item.disabled, 'selected': sDay === item.day && !item.disabled, 'disabled': item.disabled}">{{item.day}}</button>
+			</div>
+		</div>
+	</div>
+	<div class="th-calendar__container"
+		 #monthCalendar>
+		<div class="th-calendar__header"
+			 *ngIf="dateType !== DateTypeEnum.DayAndMonth">
+			<button (click)="handleSelector(cType.month)"
+					class="period__selector">{{periodYear}}
+				<i-feather name="chevron-up"></i-feather>
+			</button>
+			<span class="nav__arrows">
+				<button (click)="handlePrevious(cType.month)">
+					<i-feather name="chevron-left"></i-feather>
+				</button>
+				<button (click)="handleNext(cType.month)">
+					<i-feather name="chevron-right"></i-feather>
+				</button>
+			</span>
+		</div>
+		<div class="th-calendar__body">
+			<hr *ngIf="dateType !== DateTypeEnum.DayAndMonth">
+			<div class="th-calendar-year__content">
+				<button (click)="handleSelectedMonth(i)"
+						*ngFor="let month of months; let i = index"
+						[ngClass]="{'current': cMonth === i, 'selected': sMonth === month}">{{month | uppercase}}</button>
+			</div>
+		</div>
+	</div>
+	<div class="th-calendar__container"
+		 #yearCalendar>
+		<div class="th-calendar__header">
+			<button (click)="handleSelector(cType.year)"
+					class="period__selector">{{periodYears}}
+				<i-feather name="chevron-up"></i-feather>
+			</button>
+			<span class="nav__arrows">
+				<button (click)="handlePrevious(cType.year)">
+					<i-feather name="chevron-left"></i-feather>
+				</button>
+				<button (click)="handleNext(cType.year)">
+					<i-feather name="chevron-right"></i-feather>
+				</button>
+			</span>
+		</div>
+		<div class="th-calendar__body">
+			<hr>
+			<div class="th-calendar-year__content">
+				<button (click)="handleSelectedYear(year)"
+						*ngFor="let year of years"
+						[ngClass]="{'current': cYear === year, 'selected': sYear === year}">{{year}}</button>
+			</div>
+		</div>
+	</div>
+</div>

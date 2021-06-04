@@ -1,0 +1,66 @@
+<section [id]="PREFIX+'__'+id"
+		 class="th-window"
+		 title="">
+	<header class="th-window__header">
+		<span class="th-window__title">{{title}}</span>
+		<span class="th-window__header_actions">
+			<ng-container *ngIf="windowStatus">
+				<span class="th-window__header_status"
+					  [ngClass]="windowStatus | lowercase">
+					{{windowStatus}}
+				</span>
+			</ng-container>
+
+			<ng-container *ngIf="search.observers.length > 0">
+				<a class="th-window__header_icon"
+				   (click)="handleSearch()">
+					<i-feather name="search"
+							   [style.color]="'#ffffff'">
+					</i-feather>
+				</a>
+			</ng-container>
+
+			<a class="th-window__header_icon"
+			   (click)="handleClose()">
+				<i-feather name="x"
+						   [style.color]="'#ffffff'"></i-feather>
+			</a>
+		</span>
+	</header>
+
+	<div class="th-window__body">
+		<ng-container *ngIf="organism">
+			<div class="th-window__body_organism-name">
+				<span>{{organismName}}</span>
+			</div>
+		</ng-container>
+		<ng-container *ngIf="lgpdConsentiment !== null">
+			<div *ngIf="lgpdConsentiment === consentimentEnum.None"
+				 class="th-window__lgpd-consentiment th-window__lgpd-consentiment__no-consentiment">
+				<span>LGPD - Sem consentimento</span>
+			</div>
+			<div *ngIf="lgpdConsentiment !== consentimentEnum.None"
+				 class="th-window__lgpd-consentiment th-window__lgpd-consentiment__has-consentiment">
+				<span>LGPD - Com consentimento</span>
+			</div>
+		</ng-container>
+		<ng-container *ngIf="showRequiredHelper">
+			<div class="container">
+				<div class="row th-mb-0 th-mt-10">
+					<div class="col">
+						<span class="th-window__body_required-helper">Campos com &nbsp; <strong>*</strong> &nbsp; são
+							obrigatórios.</span>
+					</div>
+				</div>
+			</div>
+		</ng-container>
+
+		<ng-content select="[windowBody]">
+		</ng-content>
+	</div>
+	<hr>
+	<footer class="th-window__footer">
+		<ng-content select="[windowFooter]">
+		</ng-content>
+	</footer>
+</section>

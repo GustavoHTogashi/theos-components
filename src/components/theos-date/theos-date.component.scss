@@ -1,0 +1,5 @@
+@import "../../assets/styles/input.scss";
+
+.th-ipt {
+  @include overridable-th-ipt(32);
+}

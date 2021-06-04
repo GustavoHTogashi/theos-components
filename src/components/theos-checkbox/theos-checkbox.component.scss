@@ -1,0 +1,86 @@
+@import "../_sass/colors.scss";
+@import "../_sass/animations.scss";
+@import '../_sass/shadows.scss';
+@import '../_sass/typography.scss';
+
+.th-checkbox__field {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	width: 100%;
+
+	&.multi-line {
+		align-items: flex-start;
+		.th-checkbox__label {
+			line-height: 16px;
+		}
+	}
+}
+
+.th-checkbox {
+	background: $theos__white;
+	border: 2px solid $theos__gray_500;
+	border-radius: 3px;
+
+	display: block;
+
+	min-width: 18px;
+	width: 18px;
+	height: 18px;
+	transform: scale(1);
+}
+
+.th-checkbox__hidden {
+	cursor: pointer;
+	display: block;
+	min-width: 100%;
+	min-height: 100%;
+	border-radius: 3px;
+	appearance: none;
+}
+
+.th-checkbox__hidden:focus {
+	@include shadow-outline();
+
+	outline: none;
+}
+
+.th-checkbox__label {
+	@include ui-text();
+
+	cursor: pointer;
+	margin-bottom: 0;
+	margin: 0 8px;
+	user-select: none;
+	color: $theos__gray_800;
+	font-size: 14px;
+}
+
+.checked {
+	border-color: $theos__primary;
+	background: $theos__primary url("./assets/check.svg") center;
+	background-size: 100% 100%;
+	@include animateCheckbox();
+}
+
+.half-checked {
+	border-color: $theos__primary;
+	background: $theos__primary url("./assets/minus.svg") center;
+	background-size: 100% 100%;
+	@include animateCheckbox();
+}
+
+.disabled {
+	opacity: 0.6;
+	pointer-events: none;
+}
+
+.reverse {
+	order: 2;
+}
+
+i-feather {
+	display: grid;
+	width: 20px;
+	height: 20px;
+}

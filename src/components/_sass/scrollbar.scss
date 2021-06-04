@@ -1,0 +1,43 @@
+@import './colors.scss';
+@import './units.scss';
+
+@mixin theos-scrollbar(
+  $el,
+  $bgColor: var(--gray-400),
+  $color: var(--theos-white)
+) {
+  
+  #{$el}::-webkit-scrollbar {
+    appearance: none;
+    width: toRem(12);
+    height: toRem(12);
+	will-change: scroll-position;
+  }
+
+  #{$el}::-webkit-scrollbar-thumb {
+    border: toRem(3) solid $color;
+    background-clip: padding-box;
+    border-radius: toRem(10);
+    background-color: $bgColor;
+    box-shadow: inset toRem(-1) toRem(-1) 0 $bgColor,
+      inset toRem(1) toRem(1) 0 $bgColor;
+  }
+
+  #{$el}::-webkit-scrollbar-track {
+    background-color: $color;
+  }
+
+  #{$el}::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+
+  #{$el}::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}

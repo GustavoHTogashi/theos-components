@@ -1,0 +1,42 @@
+<button #button
+		[id]="prefix+'__'+id"
+		class="th-btn"
+		type="button"
+		[title]="config.tooltip ? config.tooltip : ''"
+		[attr.no-label]="config.label == '' ? '' : null"
+		[style.background]="config.background"
+		[style.color]="config.color"
+		[style.height]="config.height + 'px'"
+		[style.width]="config.width + 'px'"
+		[style.border]="config.border"
+		[disabled]="disable"
+		(click)="type === buttonTypes.DROPDOWN ? handleOpenLabelMenu() : handleButtonClick($event)">
+	<ng-container *ngIf="config.icon">
+		<i-feather [name]="config.icon"
+				   [style.color]="config.color">
+		</i-feather>
+	</ng-container>
+	{{config.label}}
+	<ng-container *ngIf="config.iconRight">
+		<i-feather [name]="config.iconRight"
+				   class="icon-right"
+				   [style.color]="config.color">
+		</i-feather>
+	</ng-container>
+</button>
+
+<ng-template #labelMenu
+			 let-data>
+	<div class="label-menu">
+		<span *ngFor="let item of data.menuLabelList; let i = index"
+			  class="label-menu__item"
+			  [attr.disabled]="item.disable ? '' : null">
+			<button [id]="'menuButton__'+i"
+					class="label-menu__item__button"
+					[attr.disabled]="item.disable ? 'true' : null"
+					(click)="handleLabelMenuItemClick(item)">
+				<label>{{item.label}}</label>
+			</button>
+		</span>
+	</div>
+</ng-template>

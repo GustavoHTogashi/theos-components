@@ -1,0 +1,237 @@
+@import "./units.scss";
+@import "./typography.scss";
+@import "./shadows.scss";
+@import "./animations.scss";
+
+@mixin text-overflow__elipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin user-select($disabled) {
+  @if $disabled {
+    user-select: none;
+    -webkit-user-select: none;
+  } @else {
+    user-select: auto;
+    -webkit-user-select: auto;
+  }
+}
+
+@mixin th-required-mark {
+  font-weight: bold;
+  font-family: "Inter";
+  transition: color $th-animation-duration $th-animation-timing-function;
+}
+
+@mixin th-ipt__label($disabled) {
+  @include ui-text();
+  @include text-overflow__elipsis();
+  @include input-slide-bottom-animation();
+
+  @if $disabled {
+    color: var(--gray-600);
+
+    .th-required-mark {
+      color: var(--red-400);
+    }
+  } @else {
+    color: var(--gray-800);
+
+    .th-required-mark {
+      color: var(--theos-red);
+    }
+  }
+
+  .th-required-mark {
+    @include th-required-mark();
+  }
+
+  background-color: transparent;
+  left: 0;
+  padding: 0 toRem(12);
+
+  pointer-events: none;
+  position: absolute;
+  transition: color $th-animation-duration $th-animation-timing-function;
+  will-change: color, background-color, transform, font-size, line-height, left;
+
+  margin-bottom: 0; // Por causa do bootstrap.reboot.min.css
+}
+
+@mixin th-ipt__label-floating($disabled) {
+  @include input-label-text-regular-12px();
+  @include input-slide-top-animation();
+
+  background-color: var(--theos-white);
+  left: toRem(8);
+  padding: toRem(1) toRem(4);
+}
+
+@mixin th-ipt($disabled) {
+  @include ui-text();
+  @include text-overflow__elipsis();
+  @include user-select($disabled);
+
+  @if ($disabled) {
+    background-color: var(--theos-white);
+    border-color: var(--gray-400);
+    color: var(--gray-600);
+
+    :host {
+      pointer-events: none;
+    }
+  } @else {
+    background-color: transparent;
+    border-color: var(--gray-800);
+    color: var(--gray-900);
+
+    &:not([bypass-validation]) {
+      &.ng-invalid.ng-touched.ng-dirty {
+        border-color: var(--theos-red);
+
+        ~ .th-ipt__label {
+          color: var(--theos-red);
+        }
+      }
+
+      &.ng-valid.ng-touched.ng-dirty {
+        border-color: var(--theos-primary);
+
+        ~ .th-ipt__label {
+          color: var(--theos-primary);
+        }
+      }
+    }
+  }
+
+  cursor: default;
+  border-radius: toRem(3);
+  border-width: toRem(1);
+  border-style: solid;
+  min-height: toRem(32); // garantir 32px de altura do campo
+  line-height: 125%; // para o user-select no chrome não ficar quebrado
+
+  outline: none;
+
+  position: relative;
+  width: $percent__max;
+
+  transition: color,
+    border-color $th-animation-duration $th-animation-timing-function;
+  will-change: color, background-color, border-color, user-select;
+
+  z-index: 0;
+
+  :host {
+    pointer-events: auto;
+  }
+
+  &[filled],
+  &[placeholder-visible] {
+    ~ .th-ipt__label {
+      @include th-ipt__label-floating($disabled);
+    }
+  }
+
+  &:focus {
+    @include shadow-outline();
+    ~ .th-ipt__label {
+      @include th-ipt__label-floating($disabled);
+    }
+  }
+
+  ~ .th-ipt__label {
+    @include th-ipt__label($disabled);
+  }
+
+  ~ .th-ipt__actions {
+    @include th-ipt__actions($disabled);
+  }
+}
+
+@mixin th-ipt__actions($disabled) {
+  button {
+    @if $disabled {
+      cursor: default;
+      pointer-events: none;
+    } @else {
+      cursor: pointer;
+      pointer-events: auto;
+    }
+
+    background-color: transparent;
+    border: none;
+    border-radius: toRem(3);
+    padding: toRem(0);
+    outline: none;
+  }
+
+  button:focus {
+    @include shadow-outline(2);
+  }
+
+  i-feather {
+    @if $disabled {
+      color: var(--gray-500);
+    } @else {
+      color: var(--gray-600);
+    }
+
+    display: grid;
+    place-items: center;
+    height: 20px;
+    width: 20px;
+
+    transition: color $th-animation-duration $th-animation-timing-function;
+    will-change: color;
+  }
+
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  right: 0;
+  z-index: 2;
+  margin-right: toRem(12);
+
+  @include user-select(false);
+}
+
+.th-ipt__field {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+@mixin overridable-th-ipt($width) {
+  padding: 0 toRem(12 + $width) 0 toRem(12);
+  &:focus,
+  &[filled],
+  &[placeholder-visible] {
+    ~ .th-ipt__label {
+      max-width: calc(#{$percent__max} - #{toRem(16 + $width)});
+    }
+  }
+  ~ .th-ipt__label {
+    max-width: calc(#{$percent__max} - #{toRem($width)});
+  }
+}
+
+.th-ipt {
+  &[disabled] {
+    @include th-ipt(true);
+  }
+
+  &:not([disabled]) {
+    @include th-ipt(false);
+  }
+
+  @include overridable-th-ipt(0);
+}
+
+::placeholder {
+  color: var(--gray-600);
+}

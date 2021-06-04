@@ -1,0 +1,49 @@
+@import '../_sass/colors.scss';
+@import '../_sass/input.scss';
+@import '../_sass/scrollbar.scss';
+
+@include theos-scrollbar('.th-ipt');
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+.disabled {
+  opacity: 0.6 !important;
+  user-select: none !important;
+  pointer-events: none !important;
+}
+
+.th-ipt__field {
+  align-items: flex-start;
+}
+
+.th-ipt {
+  height: auto;
+  white-space: normal;
+  text-overflow: unset;
+  padding: 12px;
+  line-height: 20px;
+  overflow-y: scroll;
+
+  &:focus,
+  &[has-value] {
+    ~ .th-ipt__label {
+      top: 10px;
+    }
+  }
+
+  &:first-child {
+    padding: 6px 12px;
+  }
+}
+
+.th-ipt__label {
+  top: 2px;
+}
+
+.th-ipt__dynamic-content {
+  position: absolute;
+  bottom: 0;
+  right: 12px;
+}

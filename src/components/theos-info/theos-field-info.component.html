@@ -1,0 +1,20 @@
+<span #thInputField
+	  class="th-ipt__field">
+	<div [id]="PREFIX+'__'+config.id+'__info'"
+		 [attr.filled]="config.control.value ? true : null"
+		 [attr.disabled]="config.control.disabled ? '' : null"
+		 [attr.readonly]="''"
+		 class="th-ipt"
+		 [ngStyle]="config.style"
+		 #tooltip="matTooltip"
+		 [matTooltip]="config.tooltip?.message || config.control.value"
+		 [matTooltipPosition]="'above'"
+		 [matTooltipClass]="config.tooltip?.class ? config.tooltip?.class : 'th-mat-tooltip'"
+		 [matTooltipShowDelay]="300"
+		 [matTooltipDisabled]="config.control.disabled">
+		{{config.control.value}}
+	</div>
+	<label class="th-ipt__label"
+		   [for]="PREFIX+'__'+config?.id+'__info'"> {{config.label}}
+	</label>
+</span>

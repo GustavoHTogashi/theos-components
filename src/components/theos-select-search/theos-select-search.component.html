@@ -1,0 +1,131 @@
+<span class="th-ipt__field">
+	<input #thInputFake
+		   type="checkbox"
+		   class="th-ipt__hidden"
+		   [hidden]="disabled">
+	<div #thSelect
+		 #menuTrigger="matMenuTrigger"
+		 #elementoPrincipal
+		 [id]="PREFIX+'__'+id"
+		 [attr.has-value]="hasValue"
+		 [attr.disabled]="disabled ? '' : null"
+		 class="th-ipt"
+		 [ngClass]="{'th-ipt__invalid': invalid, 'th-ipt__valid': valid}"
+		 [matMenuTriggerFor]="optionsMenu">
+		<mat-menu #optionsMenu="matMenu"
+				  [yPosition]="'below'"
+				  [classList]="'mat-menu-panel__with-search'"
+				  [ngStyle]="{width: thSelect.style.width}">
+			<div mat-menu-item
+				 [ngStyle]="{'width':getWidth(elementoPrincipal)}"
+				 class="mat-menu-item__fixed-header"
+				 (click)="$event.stopPropagation()"
+				 [disableRipple]="true">
+
+				<input #thInputSearch
+					   type="text"
+					   class="th-select-search__filter"
+					   [id]="PREFIX + '__' + id + 'filter'"
+					   placeholder="Pesquisar na lista"
+					   (keyup)="applyFilter$.next(thInputSearch.value)">
+			</div>
+			<ng-template [ngIf]="multiSelect">
+				<div mat-menu-item
+					 [ngStyle]="{'width':getWidth(elementoPrincipal)}"
+					 class="mat-menu-item"
+					 [ngClass]="{'mat-menu-item__checked': control?.value?.length === options.length}"
+					 (click)="selectAll($event)"
+					 [disableRipple]="true">
+					<div class="mat-menu-item__checkbox"></div>
+					<span>
+						Selecionar todos
+					</span>
+				</div>
+			</ng-template>
+			<ng-template ngFor
+						 [ngForOf]="(filteredItems$ | async) || options"
+						 let-option>
+				<ng-template [ngIf]="multiSelect"
+							 [ngIfElse]="menuItemSingleSelect">
+					<div mat-menu-item
+						 class="mat-menu-item"
+						 [ngStyle]="{'width':getWidth(elementoPrincipal)}"
+						 [ngClass]="{'mat-menu-item__checked': (control?.value || []).includes(option.value)}"
+						 (click)="selectOption(option, $event)"
+						 [disableRipple]="true">
+						<div class="mat-menu-item__checkbox"></div>
+						<span #tooltip="matTooltip"
+							  [matTooltip]="option.label"
+							  [matTooltipPosition]="'above'"
+							  [matTooltipClass]="'th-mat-tooltip'"
+							  [matTooltipShowDelay]="300">
+							{{option.label}}
+						</span>
+					</div>
+				</ng-template>
+				<ng-template #menuItemSingleSelect>
+					<div mat-menu-item
+						 [ngStyle]="{'width':getWidth(elementoPrincipal)}"
+						 (click)="selectOption(option, $event)"
+						 [disableRipple]="true">
+						<span #tooltip="matTooltip"
+							  [matTooltip]="option.label"
+							  [matTooltipPosition]="'above'"
+							  [matTooltipClass]="'th-mat-tooltip'"
+							  [matTooltipShowDelay]="300">
+							{{option.label}}
+						</span>
+					</div>
+				</ng-template>
+			</ng-template>
+			<ng-template [ngIf]="(filteredItems$ | async)?.length === 0">
+				<span (click)="$event.stopPropagation()"
+					  class="th-input__no-search-result">Nenhum resultado encontrado</span>
+			</ng-template>
+		</mat-menu>
+		<ng-template [ngIf]="multiSelect"
+					 [ngIfElse]="singleSelect">
+
+			<ng-template [ngIf]="nullable && valueLabel.length === 0">
+				<label class="th-ipt__value-label"> {{nullOptionName}} </label>
+			</ng-template>
+
+			<ng-template [ngIf]="valueLabel.length === 1">
+				<label class="th-ipt__value-label"> {{valueLabel[0]}} </label>
+			</ng-template>
+
+			<ng-template [ngIf]="valueLabel.length > 1 && valueLabel.length < options.length">
+				<label class="th-ipt__value-label"><span class="th-ipt__value-label__chips">{{valueLabel.length}} opções
+						selecionadas</span></label>
+
+			</ng-template>
+
+			<ng-template [ngIf]="options.length !== 0 && valueLabel.length >= options.length">
+				<label class="th-ipt__value-label">Todos(as)</label>
+			</ng-template>
+		</ng-template>
+		<ng-template #singleSelect>
+			<label *ngIf="nullable"
+				   class="th-ipt__value-label"> {{valueLabel ? valueLabel : nullOptionName}} </label>
+			<label *ngIf="!nullable"
+				   class="th-ipt__value-label"> {{valueLabel}} </label>
+		</ng-template>
+	</div>
+	<label class="th-ipt__label"
+		   [for]="PREFIX+'__'+id"> {{label}}<strong *ngIf="isRequired">*</strong>
+	</label>
+	<div class="th-select-search__actions">
+		<i-feather class="chevron"
+				   [ngClass]="{'disabled': disabled, 'th-ipt__invalid': invalid, 'th-ipt__valid': valid}"
+				   [attr.disabled]="disabled ? '' : null"
+				   name="chevron-down"
+				   (click)="thSelect.click()">
+		</i-feather>
+		<i-feather *ngIf="control?.value"
+				   (click)="clearControl()"
+				   class="x"
+				   [ngClass]="{'disabled': disabled}"
+				   [attr.disabled]="disabled ? '' : null"
+				   name="x"></i-feather>
+	</div>
+</span>

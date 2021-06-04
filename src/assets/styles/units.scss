@@ -1,0 +1,7 @@
+$browser__context: 16;
+@function toRem($pixels, $context: $browser__context) {
+  @return #{$pixels/$context}rem;
+}
+
+$percent__max: 100%;
+$percent__half: 50%;

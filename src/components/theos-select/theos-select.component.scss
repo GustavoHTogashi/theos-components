@@ -1,0 +1,59 @@
+@import "../_sass/input.scss";
+@import "../_sass/scrollbar.scss";
+
+@include theos-scrollbar(".th-select__dropdown");
+
+.th-ipt {
+  @include overridable-th-ipt(32);
+
+  display: flex;
+  align-items: center;
+  caret-color: transparent;
+}
+
+.th-select__hidden {
+  width: $percent__max;
+  position: absolute;
+  appearance: none;
+  color: transparent;
+  border: none;
+  outline: none;
+
+  &:focus {
+    ~ .th-ipt {
+      @include shadow-outline();
+    }
+  }
+}
+
+.th-select__dropdown {
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  row-gap: toRem(8);
+  padding: toRem(8);
+  max-height: toRem(200);
+  overflow: auto;
+}
+
+.th-select__dropdown-option {
+  cursor: default;
+  color: var(--gray-900);
+  background-color: var(--theos-white);
+  width: $percent__max;
+  border: none;
+  border-radius: toRem(3);
+  transition: background-color $th-animation-duration
+    $th-animation-timing-function;
+  text-align: start;
+
+  &:hover,
+  &:active {
+    background-color: var(--gray-200);
+  }
+
+  &:focus {
+    outline: none;
+    @include shadow-outline();
+  }
+}

@@ -1,0 +1,142 @@
+@import "./common.scss";
+@import "./typography.scss";
+@import "./scrollbar.scss";
+@import "./units.scss";
+
+.th-mat-dialog__no-padding {
+  .mat-dialog-container {
+    padding: 0;
+    max-height: 90vh;
+  }
+}
+
+.th-mat-dialog__no-overflow {
+  .mat-dialog-container {
+    overflow: hidden;
+  }
+}
+
+.th-mat-dialog__loader {
+  .mat-dialog-container {
+    background: none;
+    box-shadow: none !important;
+  }
+}
+
+.th-mat-dialog__theos-shadow-lg {
+	.mat-dialog-container {
+	  background: none;
+	  box-shadow: none !important;
+	}
+  }
+
+.th-mat-dialog__ui-block-dialog {
+  .mat-dialog-container {
+    background: var(--theos-white);
+  }
+}
+
+.th-mat-dialog__medium {
+  &.cdk-overlay-backdrop-showing {
+    opacity: 0.6;
+  }
+  background: var(--theos-black);
+}
+
+.th-mat-dialog__dark {
+  &.cdk-overlay-backdrop-showing {
+    opacity: 0.7;
+  }
+  background: var(--theos-black);
+}
+
+.th-mat-dialog__darker {
+  &.cdk-overlay-backdrop-showing {
+    opacity: 0.8;
+  }
+  background: var(--theos-black);
+}
+.th-mat-dialog__darkest {
+  &.cdk-overlay-backdrop-showing {
+    opacity: 0.9;
+  }
+  background: var(--theos-black);
+}
+
+.th-mat-dialog__transparent {
+  &.cdk-overlay-backdrop-showing {
+    opacity: 0;
+  }
+  background: var(--theos-black);
+}
+
+.cdk-overlay-container {
+  z-index: 1100 !important;
+}
+
+mat-tooltip-component {
+  @include theosNegativeMargins();
+
+  .th-mat-tooltip {
+    @include ui-text();
+
+    margin: toRem(4);
+    background: var(--gray-900);
+    color: var(--theos-white);
+
+    &.small-tooltip {
+      font-size: 12px;
+      line-height: 100%;
+      margin: 0;
+    }
+
+    &.info {
+      @include mobile {
+        max-width: toRem(200);
+      }
+
+      background-color: var(--blue-200);
+      color: var(--blue-800);
+      overflow: visible;
+      padding: toRem(8);
+      max-width: toRem(500);
+    }
+  }
+}
+
+.mat-menu-panel__with-search {
+  position: relative;
+  max-width: unset !important;
+  height: 30vh;
+  border-color: var(--gray-300);
+  .mat-menu-content {
+    padding-top: 0 !important;
+    mat-form-field {
+      width: $percent__max;
+      .mat-form-field-infix {
+        padding-right: toRem(24);
+        .mat-menu-item__input-search {
+          &:focus {
+            box-shadow: none !important;
+          }
+        }
+      }
+    }
+
+    .mat-menu-item {
+      @include ui-text();
+
+      color: var(--gray-800);
+
+      &:hover:not([disabled]),
+      &.cdk-keyboard-focused,
+      &.cdk-focused {
+        background: var(--gray-100);
+      }
+    }
+  }
+}
+
+.cdk-overlay-pane {
+  @include theos-scrollbar("");
+}

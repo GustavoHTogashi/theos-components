@@ -1,0 +1,160 @@
+@import '../_sass/colors.scss';
+@import '../_sass/units.scss';
+@import '../_sass/shadows.scss';
+@import '../_sass/typography.scss';
+
+.th-btn {
+  @include button-text-bold();
+  @include inner-shadow-btn();
+
+  align-items: center;
+  background: $theos__gray_700;
+  border-radius: toRem(3);
+  border: none;
+  color: $theos__white;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  height: toRem(48);
+  justify-content: center;
+  padding: toRem(8) toRem(16);
+  position: relative;
+  user-select: none;
+  width: $percent__max;
+
+  transition: all 0.15s ease-in-out;
+
+  i-feather {
+    margin-bottom: toRem(2);
+    margin-right: toRem(8);
+  }
+
+  &[no-label] {
+    padding: 0;
+
+    i-feather {
+      margin: 0;
+    }
+  }
+}
+
+.th-btn:hover {
+  filter: brightness(0.9);
+}
+
+.th-btn:active {
+  position: relative;
+  top: toRem(1);
+}
+
+.th-btn:focus {
+  @include shadow-outline();
+
+  outline: none;
+}
+
+.th-btn:disabled {
+  transition: background 0.15s ease-in-out;
+  background: $theos__gray_400 !important;
+  color: $theos__gray_500 !important;
+  pointer-events: none !important;
+  box-shadow: none !important;
+
+  i-feather {
+    color: $theos__gray_500 !important;
+  }
+}
+
+i-feather {
+  display: grid;
+}
+
+@mixin buttonStyle() {
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  transition: all 0.15s ease-in-out;
+
+  &:disabled {
+    background: $theos__gray_100 !important;
+    box-shadow: none !important;
+    color: $theos__gray_500 !important;
+    pointer-events: none !important;
+
+    i-feather {
+      color: $theos__gray_500 !important;
+    }
+  }
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+
+  &:active {
+    position: relative;
+    top: toRem(1);
+  }
+
+  &:focus {
+    @include shadow-outline();
+    outline: none;
+  }
+
+  i-feather {
+    display: grid;
+  }
+}
+
+// Dropdown menu properties
+.th-btn .icon-right {
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 8px;
+}
+
+.label-menu {
+  display: grid;
+  border-radius: toRem(4);
+  border: toRem(1) solid $theos__gray_400;
+
+  background-color: $theos__white;
+
+  .label-menu__item {
+    display: flex;
+    align-items: center;
+
+    .label-menu__item__button {
+      border: none;
+      cursor: pointer;
+      display: flex;
+      border-radius: toRem(4);
+      padding: toRem(4) toRem(8) 0 toRem(8);
+      width: $percent__max;
+      background-color: $theos__white;
+      &:last-of-type {
+        padding-bottom: toRem(4);
+      }
+      label {
+        @include ui-text();
+        line-height: 19.6px;
+        margin-bottom: 0px;
+        cursor: pointer;
+      }
+    }
+
+    &[disabled] {
+      background: $theos__gray_100 !important;
+      color: $theos__gray_500 !important;
+      pointer-events: none !important;
+      box-shadow: none !important;
+
+      i-feather {
+        color: $theos__gray_500 !important;
+      }
+    }
+  }
+}

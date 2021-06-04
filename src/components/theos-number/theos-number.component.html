@@ -1,0 +1,41 @@
+<span class="th-ipt__field">
+	<input #thNumber
+		   type="text"
+		   number
+		   [id]="PREFIX+'__'+config.id"
+		   class="th-ipt"
+		   [ngStyle]="config.style"
+		   [formControl]="config.control"
+		   [attr.filled]="config.control?.value != null ? '' : null"
+		   [attr.placeholder-visible]="isPlaceholderVisible ? '' : null"
+		   [attr.bypass-validation]="config.bypassColorizeOnValidation ? '':  null"
+		   #tooltip="matTooltip"
+		   [matTooltip]="config.tooltip?.message"
+		   [matTooltipPosition]="'above'"
+		   [matTooltipClass]="config.tooltip?.class ? config.tooltip?.class : 'th-mat-tooltip'"
+		   [matTooltipShowDelay]="300"
+		   [matTooltipDisabled]="config.control.disabled"
+		   (focus)="handleFocus()"
+		   (focusout)="handleFocusOut()">
+
+	<ng-container *ngIf="config.label">
+		<label class="th-ipt__label"
+			   [for]="PREFIX+'__'+config.id">
+			<ng-container *ngIf="isRequired">
+				<span class="th-required-mark">*</span>
+			</ng-container>
+			{{config.label || ''}}
+		</label>
+	</ng-container>
+
+	<i-feather class="th_number__chevron th-number__chevron-up"
+			   [attr.disabled]="config.control.disabled ? '' : null"
+			   (click)="handleChevronUpClick()"
+			   name="chevron-up">
+	</i-feather>
+	<i-feather class="th_number__chevron th-number__chevron-down"
+			   [attr.disabled]="config.control.disabled ? '' : null"
+			   (click)="handleChevronDownClick()"
+			   name="chevron-down">
+	</i-feather>
+</span>
